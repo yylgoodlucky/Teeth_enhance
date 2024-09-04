@@ -50,31 +50,40 @@ def main():
     to_tensor = transforms.Compose([transforms.ToTensor(),
                                     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),])
 
+    # ===> get input frames
+    frames_list = []
+    if splitext(opt.input_path)[1] in ('.mp4', '.avi'):
+        cap = cv2.VideoCapture(str(opt.input_path))
+        frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        fps = int(cap.get(cv2.CAP_PROP_FPS))
+
+        while cap.isOpened():
+            still_reading, frame_rgb = cap.read()
+            if not still_reading:
+                cap.release()
+                break
+            frames_list.append(frame_rgb)
+            
+        save_path = join(opt.save_path, basename(opt.input_path)[:-4])
+            
+    elif os.path.isdir(opt.input_path):
+        for imgpath in sorted(os.listdir(opt.input_path)):
+            frame = cv2.imread(join(opt.input_path, imgpath))
+            frame_height, frame_width, _ = frame.shape
+            fps = 25
+            frames_list.append(frame)
+        
+        save_path = opt.save_path
     
-    save_path = join(opt.save_path, basename(opt.video_path)[:-4])
-    # ===> get input videos information
-    cap = cv2.VideoCapture(str(opt.video_path))
-    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    fps = int(cap.get(cv2.CAP_PROP_FPS))
-    
+    # ===> define write video
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # use mp4v coding
-    output_path = join(save_path, basename(opt.video_path)[:-4] + '_teeth_enhanced.mp4')
+    output_path = join(save_path, basename(opt.input_path)[:-4] + '_teeth_enhanced.mp4')
     out_video = cv2.VideoWriter(output_path, fourcc, fps, (frame_height, frame_width))
-
-    frame_idx = -1
-    qbar = tqdm(total=frame_count, desc='processing frames')
-    while cap.isOpened():
-        still_reading, frame_rgb = cap.read()
-
-        if not still_reading:
-            cap.release()
-            break
-
-        frame_idx += 1
-        qbar.update()
-    
+            
+    # enhance
+    frame_idx = 0
+    for frame_rgb in tqdm(frames_list):
         # ===> restore faces and background if necessary
         cropped_faces, restored_faces, restored_img = restorer.enhance(
             frame_rgb,
@@ -119,15 +128,16 @@ def main():
         imwrite(teeth_enhanceimg, teeth_enhance_path)
         
         out_video.write(np.uint8(teeth_enhanceimg))
-    
+
+        frame_idx += 1
     out_video.release()
-    print(f'Successfully restored video: {basename(opt.video_path)}')
+    print(f'Successfully restored video: {basename(opt.input_path)}')
             
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Face Restoration using GFPGAN')
-    parser.add_argument('--video_path', type=str, required=True, help='Input directory containing face images')
+    parser.add_argument('--input_path', type=str, required=True, help='Input directory containing face images')
     parser.add_argument('--save_path', type=str, required=True, help='Output directory containing face images for teetch enhance')
 
     # we use version to select models, which is more user-friendly

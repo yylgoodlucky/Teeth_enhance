@@ -7,7 +7,10 @@
 <img src="docs/dilireba.png" width="400px"/>  <img src="docs/dilireba_crop.png" width="400px"/>
 <img src="docs/yangmi.png" width="400px"/>  <img src="docs/yangmi_crop.png" width="400px"/>
 
-#### :panda_face: Body teeth enhance
+
+### TODO
+- [x] Add full body teeth enhance
+- [x] Add onnx inference
 
 
 ### Dependencies and Installation

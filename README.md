@@ -31,7 +31,7 @@ pip3 install -r requirements.txt
 
 ### Quick Inference
 #### Download Pre-trained Models:
-Download pre-trained models: [GFPGANv1.3.pth](https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth)
+Download pre-trained models: [GFPGANv1.3.pth](https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth) and save it in `models/gfpgan/weights`.
 
 ```bash
 wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth -P models/GFPGAN/weights

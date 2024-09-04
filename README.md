@@ -7,6 +7,9 @@
 <img src="docs/dilireba.png" width="400px"/>  <img src="docs/dilireba_crop.png" width="400px"/>
 <img src="docs/yangmi.png" width="400px"/>  <img src="docs/yangmi_crop.png" width="400px"/>
 
+#### :panda_face: Body teeth enhance
+
+
 ### Dependencies and Installation
 
 - Pytorch >= 1.7.1
@@ -28,6 +31,20 @@ pip3 install -r requirements.txt
 
 ### Quick Inference
 #### Download Pre-trained Models:
+Download pre-trained models: [GFPGANv1.3.pth](https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth)
+
+```bash
+wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth -P models/GFPGAN/weights
+```
+
+Download pre-trained models: [parsing](https://drive.google.com/open?id=154JgKpzCPW82qINcVieuPH3fZ2e0P812) and save it in `models/face_parsing/weights`.
+
+#### Demo:
+```bash
+python enhance.py --input_path sample/yangmi.mp4 --save_path sample
+```
 
 
-#### Testing:
+### References
+- [BiSeNet](https://github.com/CoinCheung/BiSeNet)
+- [GFPGAN](https://github.com/TencentARC/GFPGAN)

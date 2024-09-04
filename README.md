@@ -41,7 +41,9 @@ Download pre-trained models: [parsing](https://drive.google.com/open?id=154JgKpz
 
 #### Demo:
 ```bash
-python enhance.py --input_path sample/yangmi.mp4 --save_path sample
+python enhance.py 
+    --input_path sample/yangmi.mp4 
+    --save_path sample
 ```
 
 

@@ -9,8 +9,8 @@
 
 
 ### TODO
-- [x] Add full body teeth enhance
-- [x] Add onnx inference
+- [ ] Add full body teeth enhance
+- [ ] Add onnx inference
 
 
 ### Dependencies and Installation

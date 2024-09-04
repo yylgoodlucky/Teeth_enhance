@@ -3,9 +3,9 @@
 ### Demo
 #### :panda_face: Head teeth enhance
 <img src="docs/dengchao.png" width="400px"/>  <img src="docs/dengchao_crop.png" width="400px"/>
-<img src="docs/dengchao.png" width="400px"/>  <img src="docs/dengchao_crop.png" width="400px"/>
-<img src="docs/dengchao.png" width="400px"/>  <img src="docs/dengchao_crop.png" width="400px"/>
-<img src="docs/dengchao.png" width="400px"/>  <img src="docs/dengchao_crop.png" width="400px"/>
+<img src="docs/zhengkai.png" width="400px"/>  <img src="docs/zhengkai_crop.png" width="400px"/>
+<img src="docs/dilireba.png" width="400px"/>  <img src="docs/dilireba_crop.png" width="400px"/>
+<img src="docs/yangmi.png" width="400px"/>  <img src="docs/yangmi_crop.png" width="400px"/>
 
 ### Dependencies and Installation
 
